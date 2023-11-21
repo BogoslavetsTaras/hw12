@@ -1,0 +1,43 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    runs-on: windows-latest  # Зміна для використання операційної системи Windows
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+
+    - name: Grant execute permission to mvnw
+      run: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+    - name: Install dependencies and build project
+      run: |
+        .\mvnw clean package
+        # Додайте будь-які інші команди для встановлення залежностей та збірки
+
+    - name: Run unit tests
+      run: |
+        # Команди для виконання модульних тестів
+        # Додайте команди для виконання тестів вашого проекту
+
+  manual_trigger:
+    runs-on: windows-latest
+    needs: build
+    if: github.event_name == 'workflow_dispatch'
+
+    steps:
+    - name: Manual trigger
+      run: echo "This job was manually triggered"
