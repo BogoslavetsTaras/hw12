@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '17'
-        distribution: 'adopt'  # Додаємо параметр distribution
+        distribution: 'adopt'
 
     - name: Grant execute permission to mvnw
       run: chmod +x mvnw
@@ -28,8 +28,7 @@ jobs:
     - name: Install dependencies and build project
       run: |
         ./mvnw clean package
-        # Додайте будь-які інші команди для встановлення залежностей та збірки
-
+        
     - name: Run unit tests
       run: |
         # Команди для виконання модульних тестів
@@ -42,4 +41,4 @@ jobs:
 
     steps:
     - name: Manual trigger
-      run: echo "This job was manually triggered"
+      run: echo "This job was manually started!"
