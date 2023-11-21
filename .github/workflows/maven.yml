@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Continuous Integration
 
 on:
   push:
@@ -9,16 +9,20 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Зміна для використання операційної системи Windows
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        java-version: [17]  # Вказуємо версію Java
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up JDK 17
+    - name: Set up JDK ${{ matrix.java-version }}
       uses: actions/setup-java@v2
       with:
-        java-version: '17'
+        java-version: ${{ matrix.java-version }}
 
     - name: Grant execute permission to mvnw
       run: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
