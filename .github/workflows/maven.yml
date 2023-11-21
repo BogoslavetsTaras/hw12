@@ -10,17 +10,16 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Зміна на операційну систему Ubuntu
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up latest JDK
+    - name: Set up JDK
       uses: actions/setup-java@v2
       with:
-        java-version: 'latest'
-        distribution: 'adopt'
+        java-version: '17'  # Встановлюємо конкретну версію Java
 
     - name: Grant execute permission to mvnw
       run: chmod +x mvnw
